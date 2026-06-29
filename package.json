@@ -1,6 +1,6 @@
 {
     "name": "n8n-nodes-billingo",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "This is an n8n community node to use Billingo API in n8n workflows.",
     "license": "MIT",
     "homepage": "",
