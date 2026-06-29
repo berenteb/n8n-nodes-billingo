@@ -19,6 +19,9 @@
         "type": "git",
         "url": "https://github.com/berenteb/n8n-nodes-billingo.git"
     },
+    "publishConfig": {
+        "access": "public"
+    },
     "scripts": {
         "build": "n8n-node build",
         "build:watch": "tsc --watch",
