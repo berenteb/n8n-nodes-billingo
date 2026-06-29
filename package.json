@@ -1,0 +1,59 @@
+{
+    "name": "n8n-nodes-billingo",
+    "version": "0.1.2",
+    "description": "This is an n8n community node to use Billingo API in n8n workflows.",
+    "license": "MIT",
+    "homepage": "",
+    "keywords": [
+        "n8n-community-node-package",
+        "n8n",
+        "billingo",
+        "api",
+        "workflow"
+    ],
+    "author": {
+        "name": "Bálint Berente",
+        "email": "balint.berente@gmail.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/berenteb/n8n-nodes-billingo.git"
+    },
+    "scripts": {
+        "build": "n8n-node build",
+        "build:watch": "tsc --watch",
+        "dev": "n8n-node dev",
+        "lint": "n8n-node lint",
+        "lint:fix": "n8n-node lint --fix",
+        "release": "n8n-node release",
+        "prepublishOnly": "n8n-node prerelease",
+        "generate-billingo-api": "openapi-generator-cli generate -i openapi.yml -g typescript-fetch -o generated/billingo/api && node scripts/fix-generated-billingo-api.mjs",
+        "generate-billingo-node": "node scripts/generate-billingo-node-metadata.mjs",
+        "generate-billingo": "npm run generate-billingo-api && npm run generate-billingo-node"
+    },
+    "files": [
+        "dist"
+    ],
+    "n8n": {
+        "n8nNodesApiVersion": 1,
+        "strict": true,
+        "credentials": [
+            "dist/credentials/BillingoApi.credentials.js"
+        ],
+        "nodes": [
+            "dist/nodes/Billingo/Billingo.node.js"
+        ]
+    },
+    "devDependencies": {
+        "@n8n/node-cli": "0.36.2",
+        "@openapitools/openapi-generator-cli": "^2.30.2",
+        "eslint": "9.29.0",
+        "prettier": "3.6.2",
+        "release-it": "^19.0.4",
+        "typescript": "5.9.2",
+        "yaml": "^2.9.0"
+    },
+    "peerDependencies": {
+        "n8n-workflow": "*"
+    }
+}
