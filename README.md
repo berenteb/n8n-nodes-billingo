@@ -1,73 +1,88 @@
 # n8n-nodes-billingo
 
-This is an n8n community node. It lets you use GitHub Issues in your n8n workflows.
+This is an n8n community node package for using the [Billingo](https://www.billingo.hu/) API in n8n workflows.
 
-[n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/sustainable-use-license/) workflow automation platform.
+[n8n](https://n8n.io/) is a workflow automation platform. Community nodes let you add integrations that are not bundled with n8n itself.
 
-[Installation](#installation)
-[Operations](#operations)
-[Credentials](#credentials)
-[Compatibility](#compatibility)
-[Usage](#usage)
-[Resources](#resources)
+## Disclaimer
+
+This package is developed for personal use and is shared publicly as-is. Use it at your own risk.
+
+This is not an official Billingo product, and it is not the official Billingo n8n implementation. It is not endorsed, maintained, reviewed, or supported by Billingo. Verify the generated requests and responses against Billingo's current API documentation before using this package in production or for business-critical invoicing workflows.
+
+## How This Node Was Generated
+
+The node metadata is generated from Billingo's official OpenAPI descriptor. The repository keeps that descriptor as `openapi.yml`, then uses generation scripts to create the Billingo API client and n8n node metadata.
+
+The generated metadata lives in `nodes/Billingo/generated/metadata.ts`. The generator script is `scripts/generate-billingo-node-metadata.mjs`.
+
+To regenerate the generated files after updating the OpenAPI descriptor:
+
+```sh
+npm run generate-billingo
+```
+
+Always review the generated changes before publishing or upgrading a production workflow. OpenAPI descriptors can describe the API surface, but they do not replace manual validation of workflow behavior, edge cases, or Billingo account-specific configuration.
 
 ## Installation
 
-Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
+Follow the [n8n community nodes installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) and install this package by its npm package name:
 
-## Operations
+```sh
+n8n-nodes-billingo
+```
 
-- Issues
-    - Get an issue
-    - Get many issues in a repository
-    - Create a new issue
-- Issue Comments
-    - Get many issue comments
+For self-hosted n8n instances, you can also install community nodes from the n8n UI under **Settings > Community Nodes**, if community nodes are enabled for your instance.
 
 ## Credentials
 
-You can use either access token or OAuth2 to use this node.
+This node uses a Billingo API key.
 
-### Access token
+1. Create or copy an API key from your Billingo account.
+2. In n8n, create a new **Billingo API** credential.
+3. Paste the API key into the **API Key** field.
+4. Save and test the credential.
 
-1. Open your GitHub profile [Settings](https://github.com/settings/profile).
-2. In the left navigation, select [Developer settings](https://github.com/settings/apps).
-3. In the left navigation, under Personal access tokens, select Tokens (classic).
-4. Select Generate new token > Generate new token (classic).
-5. Enter a descriptive name for your token in the Note field, like n8n integration.
-6. Select the Expiration you'd like for the token, or select No expiration.
-7. Select Scopes for your token. For most of the n8n GitHub nodes, add the `repo` scope.
-    - A token without assigned scopes can only access public information.
-8. Select Generate token.
-9. Copy the token.
+The credential sends the API key to Billingo using the `X-API-KEY` header.
 
-Refer to [Creating a personal access token (classic)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic) for more information. Refer to Scopes for OAuth apps for more information on GitHub scopes.
+## Operations
 
-![Generated Access token in GitHub](https://docs.github.com/assets/cb-17251/mw-1440/images/help/settings/personal-access-tokens.webp)
+This package exposes operations generated from Billingo API v3 endpoints described in the OpenAPI descriptor. The available resources and operations may change when the descriptor is updated and the node metadata is regenerated.
 
-### OAuth2
-
-If you're self-hosting n8n, create a new GitHub [OAuth app](https://docs.github.com/en/apps/oauth-apps):
-
-1. Open your GitHub profile [Settings](https://github.com/settings/profile).
-2. In the left navigation, select [Developer settings](https://github.com/settings/apps).
-3. In the left navigation, select OAuth apps.
-4. Select New OAuth App.
-    - If you haven't created an app before, you may see Register a new application instead. Select it.
-5. Enter an Application name, like n8n integration.
-6. Enter the Homepage URL for your app's website.
-7. If you'd like, add the optional Application description, which GitHub displays to end-users.
-8. From n8n, copy the OAuth Redirect URL and paste it into the GitHub Authorization callback URL.
-9. Select Register application.
-10. Copy the Client ID and Client Secret this generates and add them to your n8n credential.
-
-Refer to the [GitHub Authorizing OAuth apps documentation](https://docs.github.com/en/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps) for more information on the authorization process.
+Because the node is generated, broad API coverage is prioritized over hand-written, workflow-specific UX. Some operations may require JSON input for complex request bodies.
 
 ## Compatibility
 
-Compatible with n8n@1.60.0 or later
+This package is built as an n8n community node and declares `n8n-workflow` as a peer dependency. Use it with an n8n version that supports community nodes and the current n8n node API used by this package.
+
+## Development
+
+Install dependencies:
+
+```sh
+npm install
+```
+
+Build the package:
+
+```sh
+npm run build
+```
+
+Run linting:
+
+```sh
+npm run lint
+```
+
+Run n8n in development mode with this node linked:
+
+```sh
+npm run dev
+```
 
 ## Resources
 
-* [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
-* [GitHub API docs](https://docs.github.com/en/rest/issues)
+- [Billingo API documentation](https://www.billingo.hu/api)
+- [n8n community nodes documentation](https://docs.n8n.io/integrations/community-nodes/)
+- [n8n creating nodes documentation](https://docs.n8n.io/integrations/creating-nodes/)
